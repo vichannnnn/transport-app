@@ -1,0 +1,6 @@
+{$DOMAIN} {
+	handle_path /api/v1/* {
+		reverse_proxy backend:8000
+	}
+}
+
