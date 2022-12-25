@@ -62,4 +62,4 @@ def shortest_path(graph, start, end, path=None):
 
 
 graph = load_graph('stations.json')
-print(shortest_path(graph, 'ns9/te2', 'ns24/ne6/cc1'))
+print(shortest_path(graph, 'Woodlands', 'Dhoby Ghaut'))
