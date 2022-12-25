@@ -87,7 +87,7 @@ class TravelState:
     def __init__(
             self,
             current_station: TrainStation,
-            next_station: TrainStation = None,
+            next_station: TrainStation,
             current_route=None,
             steps: int = 0,
             time_spent: int = 0,
@@ -98,23 +98,32 @@ class TravelState:
         self.current_route = current_route
         self.steps = steps
         self.time_spent = time_spent
+        self.set_starting_route()
 
-    def travel_one_station(self):
-        self.previous_station = self.current_station
-        self.current_station = self.next_station
-        self.time_spent += self.previous_station.connecting_nodes[self.current_station.name]['time_taken']
-
-    def set_starting_route(self, next_station: TrainStation):
-        self.current_route = list(set(next_station.routes).intersection(
+    def set_starting_route(self):
+        self.current_route = list(set(self.next_station.routes).intersection(
             self.current_station.routes
         ))[0]
-        self.next_station = next_station
         return self.current_route
+
+    def travel_one_station(self):
+        print(a := self.check_transfer_route())
+
+        if a[0]:
+            self.time_spent += 5
+
+        self.time_spent += self.current_station.connecting_nodes[self.next_station.name]['time_taken']
+        self.previous_station = self.current_station
+        self.current_station = self.next_station
 
     def check_transfer_route(self):
         transfer = False
         if self.previous_station:
-            if not any(route in self.previous_station.routes for route in self.next_station.routes):
+            self.current_route = list(set(self.previous_station.routes).intersection(
+                self.current_station.routes
+            ))[0]
+
+            if self.current_route not in self.next_station.routes:
                 self.current_route = list(set(self.next_station.routes).intersection(
                     self.current_station.routes
                 ))[0]
@@ -122,12 +131,22 @@ class TravelState:
         return transfer, self.current_route
 
 
-travel = TravelState(novena)
-print(travel.set_starting_route(newton))
+travel_route = [novena, newton, orchard, newton, stevens]
+
+travel = TravelState(current_station=newton, next_station=novena)
 travel.travel_one_station()
 print(travel.time_spent)
-travel.next_station = orchard
-print(travel.check_transfer_route())
+
+for station in travel_route[1:]:
+
+    travel.next_station = station
+    travel.travel_one_station()
+    print(travel.time_spent)
+
+    # if station == stevens:
+    #     import pdb
+    #     pdb.set_trace()
+
 
 # class TrainStation(Base):
 #     __tablename__ = "mrt_station"
