@@ -1,9 +1,8 @@
+from app.api.api import api_router
 from fastapi import FastAPI
 from fastapi.middleware import cors
-from app.router import train_router
 
-
-app = FastAPI(root_path="/api/v1")
+app = FastAPI()
 
 app.add_middleware(
     cors.CORSMiddleware,
@@ -13,4 +12,14 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(train_router)
+app.include_router(api_router)
+
+
+@app.on_event("startup")
+async def on_startup() -> None:
+    pass
+
+
+@app.on_event("shutdown")
+async def shutdown_event() -> None:
+    pass

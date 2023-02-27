@@ -69,7 +69,7 @@ d4 = {
         "Newton": {"time_taken": 2},
         "Somerset": {"time_taken": 2},
         "Orchard Boulevard": {"time_taken": 2},
-        "Great World": {"time_taken": 2}
+        "Great World": {"time_taken": 2},
     },
 }
 
@@ -85,12 +85,12 @@ print(orchard)
 
 class TravelState:
     def __init__(
-            self,
-            current_station: TrainStation,
-            next_station: TrainStation,
-            current_route=None,
-            steps: int = 0,
-            time_spent: int = 0,
+        self,
+        current_station: TrainStation,
+        next_station: TrainStation,
+        current_route=None,
+        steps: int = 0,
+        time_spent: int = 0,
     ):
         self.current_station = current_station
         self.previous_station = None
@@ -101,9 +101,9 @@ class TravelState:
         self.set_starting_route()
 
     def set_starting_route(self):
-        self.current_route = list(set(self.next_station.routes).intersection(
-            self.current_station.routes
-        ))[0]
+        self.current_route = list(
+            set(self.next_station.routes).intersection(self.current_station.routes)
+        )[0]
         return self.current_route
 
     def travel_one_station(self):
@@ -112,21 +112,27 @@ class TravelState:
         if a[0]:
             self.time_spent += 5
 
-        self.time_spent += self.current_station.connecting_nodes[self.next_station.name]['time_taken']
+        self.time_spent += self.current_station.connecting_nodes[
+            self.next_station.name
+        ]["time_taken"]
         self.previous_station = self.current_station
         self.current_station = self.next_station
 
     def check_transfer_route(self):
         transfer = False
         if self.previous_station:
-            self.current_route = list(set(self.previous_station.routes).intersection(
-                self.current_station.routes
-            ))[0]
+            self.current_route = list(
+                set(self.previous_station.routes).intersection(
+                    self.current_station.routes
+                )
+            )[0]
 
             if self.current_route not in self.next_station.routes:
-                self.current_route = list(set(self.next_station.routes).intersection(
-                    self.current_station.routes
-                ))[0]
+                self.current_route = list(
+                    set(self.next_station.routes).intersection(
+                        self.current_station.routes
+                    )
+                )[0]
                 transfer = True
         return transfer, self.current_route
 
