@@ -1,9 +1,8 @@
 .env
 postgres/
-*/__pycache__/
+**/__pycache__/
 */cookies.json
 .DS_store
 .idea
-*/*/__pycache__/
 */.venv
 */mypy_cache

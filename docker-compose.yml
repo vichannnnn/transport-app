@@ -1,14 +1,15 @@
 ---
-version: '3.3'
+version: '3.8'
 
 services:
   backend:
-    container_name: varys-backend
+    container_name: backend
     build: ./backend
     command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+    ports:
+      - "8000:8000"
+      - "9000:9000"
     depends_on:
-      caddy:
-        condition: service_started
       db:
         condition: service_healthy
     environment:
@@ -21,22 +22,6 @@ services:
     volumes:
       - ./backend:/app
 
-  caddy:
-    environment:
-      DOMAIN: ${DOMAIN}
-      PGADMIN_DOMAIN: ${PGADMIN_DOMAIN}
-    image: caddy:2.6.2-alpine
-    ports:
-      - '80:80'
-      - '443:443'
-      - '8000:8000'
-      - '9000:9000'
-    restart: unless-stopped
-    volumes:
-      - ./Caddyfile:/etc/caddy/Caddyfile
-      - caddy_data:/data
-      - caddy_config:/config
-
   db:
     environment:
       POSTGRES_DB: ${POSTGRES_DB}
@@ -46,27 +31,12 @@ services:
     healthcheck:
       interval: 5s
       retries: 10
-      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      test: [ "CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB" ]
     image: postgres:14.1-alpine
     ports:
       - '5432:5432'
     restart: unless-stopped
     volumes:
       - ./postgres:/var/lib/postgresql/data
+      - ./db:/docker-entrypoint-initdb.d/
 
-  pg_admin:
-    depends_on:
-      db:
-        condition: service_healthy
-    environment:
-      - GUNICORN_THREADS=1
-      - PGADMIN_DEFAULT_EMAIL=${PGADMIN_DEFAULT_EMAIL}
-      - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_DEFAULT_PASSWORD}
-    image: dpage/pgadmin4:6.15
-    ports:
-      - '4000:80'
-    restart: unless-stopped
-
-volumes:
-  caddy_config: null
-  caddy_data: null

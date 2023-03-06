@@ -1,179 +1,129 @@
-from __future__ import annotations
-from datetime import date, datetime
-from typing import List, Optional
-from datetime import date, datetime
+from app.db.base_class import Base
+from sqlalchemy import (
+    Column,
+    Integer,
+    String,
+    Boolean,
+    ForeignKey,
+    UniqueConstraint,
+    select,
+    update,
+    literal_column,
+)
+from sqlalchemy.orm import relationship, selectinload
+from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy import exc as SQLAlchemyExceptions
+from app.exceptions import AppError
+from app.schemas.core import TrainStationSchema, TrainStationWithConnectionSchema, ConnectingStationSchema
 from typing import List
 
-from pydantic import BaseModel
-from sqlalchemy import Column, UniqueConstraint, select, insert, or_, ForeignKey
-from sqlalchemy import Column, UniqueConstraint, select, or_, ForeignKey
-from sqlalchemy import Boolean, DateTime, Integer, String, Index, BigInteger
-from sqlalchemy.dialects import postgresql
-from sqlalchemy import exc as SQLAlchemyExceptions
-from sqlalchemy.dialects.postgresql import JSONB
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import relationship
-from sqlalchemy.sql.expression import func, text
-from sqlalchemy.exc import IntegrityError
-from sqlalchemy.orm import relationship
-from fastapi import HTTPException
-from sqlalchemy.ext.asyncio import AsyncSession
 
-Base = declarative_base()
+class Station(Base):
+    __tablename__ = "train_station"
+    row_id = Column(Integer, primary_key=True, nullable=False)
+    id = Column(String, unique=True, nullable=False)
+    name = Column(String, unique=True, nullable=False)
+    interchange = Column(Boolean)
 
+    connecting_stations = relationship(
+        "ConnectingStation",
+        foreign_keys="ConnectingStation.id",
+        cascade="all, delete-orphan",
+    )
 
-class TrainStation(BaseModel):
-    name: str
-    symbol: str
-    routes: List[str]
-    connecting_nodes: dict
+    __table_args__ = (UniqueConstraint("id", "name"),)
 
+    async def insert(self, session: AsyncSession) -> TrainStationSchema:
+        try:
+            session.add(self)
+            await session.commit()
+            await session.refresh(self)
+            return TrainStationSchema(**self.__dict__)
 
-d = {
-    "name": "Newton",
-    "symbol": "NS21/DT11",
-    "routes": ["Downtown Line", "North-South Line"],
-    "connecting_nodes": {
-        "Novena": {"time_taken": 2},
-        "Orchard": {"time_taken": 2},
-        "Stevens": {"time_taken": 2},
-        "Little India": {"time_taken": 3},
-    },
-}
+        except SQLAlchemyExceptions.IntegrityError as exc:
+            await session.rollback()
+            raise AppError.STATION_ALREADY_EXISTS_ERROR from exc
 
-d2 = {
-    "name": "Novena",
-    "symbol": "NS20",
-    "routes": ["North-South Line"],
-    "connecting_nodes": {
-        "Newton": {"time_taken": 2},
-        "Toa Payoh": {"time_taken": 2},
-    },
-}
+    @classmethod
+    async def get(
+        cls, session: AsyncSession, name: str = None, id: str = None
+    ) -> TrainStationWithConnectionSchema:
 
-d3 = {
-    "name": "Stevens",
-    "symbol": "DT10/TE11",
-    "routes": ["Thomson East Coast Line", "Downtown Line"],
-    "connecting_nodes": {
-        "Newton": {"time_taken": 2},
-        "Botanic Gardens": {"time_taken": 2},
-    },
-}
+        stmt = select(Station).options(selectinload(Station.connecting_stations))
+        if name:
+            stmt = stmt.where(Station.name == name)
+        if id:
+            stmt = stmt.where(Station.id == id)
+        res = await session.execute(stmt)
+        return res.scalars().one()
 
-d4 = {
-    "name": "Orchard",
-    "symbol": "NS22",
-    "routes": ["Thomson East Coast Line", "North-South Line"],
-    "connecting_nodes": {
-        "Newton": {"time_taken": 2},
-        "Somerset": {"time_taken": 2},
-        "Orchard Boulevard": {"time_taken": 2},
-        "Great World": {"time_taken": 2},
-    },
-}
+    @classmethod
+    async def get_all(
+        cls, session: AsyncSession
+    ) -> List[TrainStationWithConnectionSchema]:
+        res = await session.execute(
+            select(Station).options(selectinload(Station.connecting_stations))
+        )
+        return res.scalars().all()
 
-newton = TrainStation(**d)
-print(newton)
-novena = TrainStation(**d2)
-print(novena)
-stevens = TrainStation(**d3)
-print(stevens)
-orchard = TrainStation(**d4)
-print(orchard)
+    @classmethod
+    async def update(
+        cls, session: AsyncSession, data: TrainStationSchema
+    ) -> TrainStationWithConnectionSchema:
+
+        stmt = (
+            update(Station)
+            .returning(literal_column("*"))
+            .where(Station.id == data.id)
+            .values(**dict(data))
+        )
+        res = await session.execute(stmt)
+        await session.commit()
+        result = TrainStationWithConnectionSchema.from_orm(res.fetchone())
+        return result
 
 
-class TravelState:
-    def __init__(
-        self,
-        current_station: TrainStation,
-        next_station: TrainStation,
-        current_route=None,
-        steps: int = 0,
-        time_spent: int = 0,
-    ):
-        self.current_station = current_station
-        self.previous_station = None
-        self.next_station = next_station
-        self.current_route = current_route
-        self.steps = steps
-        self.time_spent = time_spent
-        self.set_starting_route()
+class ConnectingStation(Base):
+    __tablename__ = "connecting_station"
 
-    def set_starting_route(self):
-        self.current_route = list(
-            set(self.next_station.routes).intersection(self.current_station.routes)
-        )[0]
-        return self.current_route
+    row_id = Column(Integer, primary_key=True, nullable=False)
+    id = Column(
+        String,
+        ForeignKey("train_station.id", ondelete="CASCADE", onupdate="CASCADE"),
+        nullable=False,
+    )
+    connecting_id = Column(
+        String,
+        ForeignKey("train_station.id", ondelete="CASCADE", onupdate="CASCADE"),
+        nullable=False,
+    )
+    distance = Column(Integer, nullable=False)
+    transit_time = Column(Integer, nullable=True)
+    __table_args__ = (UniqueConstraint("id", "connecting_id"),)
 
-    def travel_one_station(self):
-        print(a := self.check_transfer_route())
+    async def insert(self, session: AsyncSession):
+        try:
+            session.add(self)
+            await session.commit()
+            await session.refresh(self)
+            return self
 
-        if a[0]:
-            self.time_spent += 5
+        except SQLAlchemyExceptions.IntegrityError as exc:
+            await session.rollback()
+            raise AppError.STATION_NOT_FOUND_ERROR from exc
 
-        self.time_spent += self.current_station.connecting_nodes[
-            self.next_station.name
-        ]["time_taken"]
-        self.previous_station = self.current_station
-        self.current_station = self.next_station
+    @classmethod
+    async def update(
+            cls, session: AsyncSession, id: str, data: TrainStationSchema
+    ) -> ConnectingStationSchema:
 
-    def check_transfer_route(self):
-        transfer = False
-        if self.previous_station:
-            self.current_route = list(
-                set(self.previous_station.routes).intersection(
-                    self.current_station.routes
-                )
-            )[0]
-
-            if self.current_route not in self.next_station.routes:
-                self.current_route = list(
-                    set(self.next_station.routes).intersection(
-                        self.current_station.routes
-                    )
-                )[0]
-                transfer = True
-        return transfer, self.current_route
-
-
-travel_route = [novena, newton, orchard, newton, stevens]
-
-travel = TravelState(current_station=newton, next_station=novena)
-travel.travel_one_station()
-print(travel.time_spent)
-
-for station in travel_route[1:]:
-
-    travel.next_station = station
-    travel.travel_one_station()
-    print(travel.time_spent)
-
-    # if station == stevens:
-    #     import pdb
-    #     pdb.set_trace()
-
-
-# class TrainStation(Base):
-#     __tablename__ = "mrt_station"
-#     station_id = Column(
-#         Integer,
-#         primary_key=True,
-#     )
-#     name = Column(String, nullable=False, unique=True)
-#     symbol = Column(String, nullable=False)
-#     routes = Column(postgresql.ARRAY(String, dimensions=1), nullable=False)
-#     connecting_nodes = Column(JSONB, nullable=False)
-#
-#     __table_args__ = UniqueConstraint("name", "content", name="_train_station_name_uc")
-
-
-stations = {
-    "Newton": {
-        "Novena": {"time_taken": 2},
-        "Orchard": {"time_taken": 2},
-        "Stevens": {"time_taken": 2},
-        "Little India": {"time_taken": 3},
-    },
-    "Novena": {"Newton": {"time_taken": 2}, "Toa Payoh": {"time_taken": 2}},
-}
+        stmt = (
+            update(ConnectingStation)
+            .returning(literal_column("*"))
+            .where(ConnectingStation.id == id)
+            .values(**dict(data))
+        )
+        res = await session.execute(stmt)
+        await session.commit()
+        result = ConnectingStationSchema.from_orm(res.fetchone())
+        return result

@@ -1,5 +1,5 @@
 import inspect as _inspect
-
+from .core import Station, ConnectingStation
 
 # This following code is used to prevent hidden local variables
 # (variables starting with _) from being exported by this module.
