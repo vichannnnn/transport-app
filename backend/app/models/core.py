@@ -14,7 +14,11 @@ from sqlalchemy.orm import relationship, selectinload
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import exc as SQLAlchemyExceptions
 from app.exceptions import AppError
-from app.schemas.core import TrainStationSchema, TrainStationWithConnectionSchema, ConnectingStationSchema
+from app.schemas.core import (
+    TrainStationSchema,
+    TrainStationWithConnectionSchema,
+    ConnectingStationSchema,
+)
 from typing import List
 
 
@@ -67,15 +71,15 @@ class Station(Base):
         return res.scalars().all()
 
     @classmethod
-    async def update(
-        cls, session: AsyncSession, data: TrainStationSchema
+    async def update_by_id(
+        cls, session: AsyncSession, id: str, data: TrainStationSchema
     ) -> TrainStationWithConnectionSchema:
 
         stmt = (
             update(Station)
             .returning(literal_column("*"))
-            .where(Station.id == data.id)
-            .values(**dict(data))
+            .where(Station.id == id)
+            .values(name=data.name, interchange=data.interchange)
         )
         res = await session.execute(stmt)
         await session.commit()
@@ -113,16 +117,22 @@ class ConnectingStation(Base):
             raise AppError.STATION_NOT_FOUND_ERROR from exc
 
     @classmethod
-    async def update(
-            cls, session: AsyncSession, id: str, data: TrainStationSchema
+    async def update_by_id(
+        cls, session: AsyncSession, id: str, data: ConnectingStationSchema
     ) -> ConnectingStationSchema:
 
         stmt = (
             update(ConnectingStation)
             .returning(literal_column("*"))
             .where(ConnectingStation.id == id)
-            .values(**dict(data))
+            .where(ConnectingStation.connecting_id == data.connecting_id)
+            .values(
+                connecting_id=data.connecting_id,
+                distance=data.distance,
+                transit_time=data.transit_time,
+            )
         )
+
         res = await session.execute(stmt)
         await session.commit()
         result = ConnectingStationSchema.from_orm(res.fetchone())

@@ -1,0 +1,1034 @@
+{
+  "ns5": {
+    "name": "Yew Tee",
+    "id": "ns5",
+    "row_id": 11,
+    "interchange": false
+  },
+  "ns7": {
+    "name": "Kranji",
+    "id": "ns7",
+    "row_id": 12,
+    "interchange": false
+  },
+  "ns8": {
+    "name": "Marsiling",
+    "id": "ns8",
+    "row_id": 13,
+    "interchange": false
+  },
+  "ns10": {
+    "name": "Admiralty",
+    "id": "ns10",
+    "row_id": 15,
+    "interchange": false
+  },
+  "ns11": {
+    "name": "Sembawang",
+    "id": "ns11",
+    "row_id": 16,
+    "interchange": false
+  },
+  "ns13": {
+    "name": "Yishun",
+    "id": "ns13",
+    "row_id": 18,
+    "interchange": false
+  },
+  "ns14": {
+    "name": "Khatib",
+    "id": "ns14",
+    "row_id": 19,
+    "interchange": false
+  },
+  "ns15": {
+    "name": "Yio Chu Kang",
+    "id": "ns15",
+    "row_id": 20,
+    "interchange": false
+  },
+  "ns16": {
+    "name": "Ang Mo Kio",
+    "id": "ns16",
+    "row_id": 21,
+    "interchange": false
+  },
+  "ns19": {
+    "name": "Toa Payoh",
+    "id": "ns19",
+    "row_id": 24,
+    "interchange": false
+  },
+  "ns20": {
+    "name": "Novena",
+    "id": "ns20",
+    "row_id": 25,
+    "interchange": false
+  },
+  "ns23": {
+    "name": "Somerset",
+    "id": "ns23",
+    "row_id": 28,
+    "interchange": false
+  },
+  "ns28": {
+    "name": "Marina South Pier",
+    "id": "ns28",
+    "row_id": 33,
+    "interchange": false
+  },
+  "ew1": {
+    "name": "Pasir Ris",
+    "id": "ew1",
+    "row_id": 34,
+    "interchange": false
+  },
+  "ew3": {
+    "name": "Simei",
+    "id": "ew3",
+    "row_id": 36,
+    "interchange": false
+  },
+  "ew5": {
+    "name": "Bedok",
+    "id": "ew5",
+    "row_id": 38,
+    "interchange": false
+  },
+  "ew6": {
+    "name": "Kembangan",
+    "id": "ew6",
+    "row_id": 39,
+    "interchange": false
+  },
+  "ew7": {
+    "name": "Eunos",
+    "id": "ew7",
+    "row_id": 40,
+    "interchange": false
+  },
+  "ew10": {
+    "name": "Kallang",
+    "id": "ew10",
+    "row_id": 43,
+    "interchange": false
+  },
+  "ew11": {
+    "name": "Lavender",
+    "id": "ew11",
+    "row_id": 44,
+    "interchange": false
+  },
+  "ew15": {
+    "name": "Tanjong Pagar",
+    "id": "ew15",
+    "row_id": 46,
+    "interchange": false
+  },
+  "ew17": {
+    "name": "Tiong Bahru",
+    "id": "ew17",
+    "row_id": 48,
+    "interchange": false
+  },
+  "ne9": {
+    "name": "Boon Keng",
+    "id": "ne9",
+    "row_id": 71,
+    "interchange": false
+  },
+  "ew18": {
+    "name": "Redhill",
+    "id": "ew18",
+    "row_id": 49,
+    "interchange": false
+  },
+  "ne10": {
+    "name": "Potong Pasir",
+    "id": "ne10",
+    "row_id": 72,
+    "interchange": false
+  },
+  "ew19": {
+    "name": "Queenstown",
+    "id": "ew19",
+    "row_id": 50,
+    "interchange": false
+  },
+  "ew20": {
+    "name": "Commonwealth",
+    "id": "ew20",
+    "row_id": 51,
+    "interchange": false
+  },
+  "ew22": {
+    "name": "Dover",
+    "id": "ew22",
+    "row_id": 53,
+    "interchange": false
+  },
+  "ne11": {
+    "name": "Woodleigh",
+    "id": "ne11",
+    "row_id": 73,
+    "interchange": false
+  },
+  "ew23": {
+    "name": "Clementi",
+    "id": "ew23",
+    "row_id": 54,
+    "interchange": false
+  },
+  "ew25": {
+    "name": "Chinese Garden",
+    "id": "ew25",
+    "row_id": 55,
+    "interchange": false
+  },
+  "ew27": {
+    "name": "Boon Lay",
+    "id": "ew27",
+    "row_id": 57,
+    "interchange": false
+  },
+  "ew28": {
+    "name": "Pioneer",
+    "id": "ew28",
+    "row_id": 58,
+    "interchange": false
+  },
+  "ew30": {
+    "name": "Gul Circle",
+    "id": "ew30",
+    "row_id": 60,
+    "interchange": false
+  },
+  "ne12/cc13": {
+    "name": "Serangoon",
+    "id": "ne12/cc13",
+    "row_id": 74,
+    "interchange": true
+  },
+  "ew31": {
+    "name": "Tuas Crescent",
+    "id": "ew31",
+    "row_id": 61,
+    "interchange": false
+  },
+  "ew33": {
+    "name": "Tuas Link",
+    "id": "ew33",
+    "row_id": 63,
+    "interchange": false
+  },
+  "ns25/ew13": {
+    "name": "City Hall",
+    "id": "ns25/ew13",
+    "row_id": 30,
+    "interchange": true
+  },
+  "ne13": {
+    "name": "Kovan",
+    "id": "ne13",
+    "row_id": 75,
+    "interchange": false
+  },
+  "ew4/cg": {
+    "name": "Tanah Merah",
+    "id": "ew4/cg",
+    "row_id": 37,
+    "interchange": true
+  },
+  "ne14": {
+    "name": "Buangkok",
+    "id": "ne14",
+    "row_id": 76,
+    "interchange": false
+  },
+  "cc2": {
+    "name": "Bras Basah",
+    "id": "cc2",
+    "row_id": 80,
+    "interchange": false
+  },
+  "cc3": {
+    "name": "Esplanade",
+    "id": "cc3",
+    "row_id": 81,
+    "interchange": false
+  },
+  "cc5": {
+    "name": "Nicoll Highway",
+    "id": "cc5",
+    "row_id": 83,
+    "interchange": false
+  },
+  "cc6": {
+    "name": "Stadium",
+    "id": "cc6",
+    "row_id": 84,
+    "interchange": false
+  },
+  "ne15": {
+    "name": "Hougang",
+    "id": "ne15",
+    "row_id": 77,
+    "interchange": false
+  },
+  "cc7": {
+    "name": "Mountbatten",
+    "id": "cc7",
+    "row_id": 85,
+    "interchange": false
+  },
+  "cc8": {
+    "name": "Dakota",
+    "id": "cc8",
+    "row_id": 86,
+    "interchange": false
+  },
+  "cc12": {
+    "name": "Bartley",
+    "id": "cc12",
+    "row_id": 89,
+    "interchange": false
+  },
+  "cc14": {
+    "name": "Lorong Chuan",
+    "id": "cc14",
+    "row_id": 90,
+    "interchange": false
+  },
+  "cc19/dt9": {
+    "name": "Botanic Gardens",
+    "id": "cc19/dt9",
+    "row_id": 93,
+    "interchange": true
+  },
+  "cc20": {
+    "name": "Farrer Road",
+    "id": "cc20",
+    "row_id": 94,
+    "interchange": false
+  },
+  "cc21": {
+    "name": "Holland Village",
+    "id": "cc21",
+    "row_id": 95,
+    "interchange": false
+  },
+  "cc23": {
+    "name": "one-north",
+    "id": "cc23",
+    "row_id": 96,
+    "interchange": false
+  },
+  "cc24": {
+    "name": "Kent Ridge",
+    "id": "cc24",
+    "row_id": 97,
+    "interchange": false
+  },
+  "cc25": {
+    "name": "Haw Par Villa",
+    "id": "cc25",
+    "row_id": 98,
+    "interchange": false
+  },
+  "cc26": {
+    "name": "Pasir Panjang",
+    "id": "cc26",
+    "row_id": 99,
+    "interchange": false
+  },
+  "ne16/stc": {
+    "name": "Sengkang",
+    "id": "ne16/stc",
+    "row_id": 78,
+    "interchange": true
+  },
+  "ne17/ptc": {
+    "name": "Punggol",
+    "id": "ne17/ptc",
+    "row_id": 79,
+    "interchange": true
+  },
+  "cc4/dt15": {
+    "name": "Promenade",
+    "id": "cc4/dt15",
+    "row_id": 82,
+    "interchange": true
+  },
+  "cc10/dt26": {
+    "name": "MacPherson",
+    "id": "cc10/dt26",
+    "row_id": 87,
+    "interchange": true
+  },
+  "cc17/te9": {
+    "name": "Caldecott",
+    "id": "cc17/te9",
+    "row_id": 92,
+    "interchange": true
+  },
+  "bp6/dt1": {
+    "name": "Bukit Panjang",
+    "id": "bp6/dt1",
+    "row_id": 102,
+    "interchange": true
+  },
+  "dt6": {
+    "name": "King Albert Park",
+    "id": "dt6",
+    "row_id": 106,
+    "interchange": false
+  },
+  "cc27": {
+    "name": "Labrador Park",
+    "id": "cc27",
+    "row_id": 100,
+    "interchange": false
+  },
+  "cc28": {
+    "name": "Telok Blangah",
+    "id": "cc28",
+    "row_id": 101,
+    "interchange": false
+  },
+  "dt2": {
+    "name": "Cashew",
+    "id": "dt2",
+    "row_id": 103,
+    "interchange": false
+  },
+  "dt17": {
+    "name": "Downtown",
+    "id": "dt17",
+    "row_id": 112,
+    "interchange": false
+  },
+  "ns4/bp1": {
+    "name": "Choa Chu Kang",
+    "id": "ns4/bp1",
+    "row_id": 10,
+    "interchange": true
+  },
+  "dt7": {
+    "name": "Sixth Avenue",
+    "id": "dt7",
+    "row_id": 107,
+    "interchange": false
+  },
+  "dt13": {
+    "name": "Rochor",
+    "id": "dt13",
+    "row_id": 110,
+    "interchange": false
+  },
+  "dt8": {
+    "name": "Tan Kah Kee",
+    "id": "dt8",
+    "row_id": 108,
+    "interchange": false
+  },
+  "dt10/te11": {
+    "name": "Stevens",
+    "id": "dt10/te11",
+    "row_id": 109,
+    "interchange": true
+  },
+  "ns3": {
+    "name": "Bukit Gombak",
+    "id": "ns3",
+    "row_id": 9,
+    "interchange": false
+  },
+  "ns9/te2": {
+    "name": "Woodlands",
+    "id": "ns9/te2",
+    "row_id": 14,
+    "interchange": true
+  },
+  "ns17/cc15": {
+    "name": "Bishan",
+    "id": "ns17/cc15",
+    "row_id": 22,
+    "interchange": true
+  },
+  "te16": {
+    "name": "Havelock",
+    "id": "te16",
+    "row_id": 180,
+    "interchange": false
+  },
+  "te18": {
+    "name": "Maxwell",
+    "id": "te18",
+    "row_id": 181,
+    "interchange": false
+  },
+  "te19": {
+    "name": "Shenton Way",
+    "id": "te19",
+    "row_id": 182,
+    "interchange": false
+  },
+  "te22": {
+    "name": "Gardens By The Bay",
+    "id": "te22",
+    "row_id": 183,
+    "interchange": false
+  },
+  "se1": {
+    "name": "Compassvale",
+    "id": "se1",
+    "row_id": 139,
+    "interchange": false
+  },
+  "se2": {
+    "name": "Rumbia",
+    "id": "se2",
+    "row_id": 140,
+    "interchange": false
+  },
+  "se3": {
+    "name": "Bakau",
+    "id": "se3",
+    "row_id": 141,
+    "interchange": false
+  },
+  "se4": {
+    "name": "Kangkar",
+    "id": "se4",
+    "row_id": 142,
+    "interchange": false
+  },
+  "dt18": {
+    "name": "Telok Ayer",
+    "id": "dt18",
+    "row_id": 113,
+    "interchange": false
+  },
+  "bp2": {
+    "name": "South View",
+    "id": "bp2",
+    "row_id": 127,
+    "interchange": false
+  },
+  "dt20": {
+    "name": "Fort Canning",
+    "id": "dt20",
+    "row_id": 114,
+    "interchange": false
+  },
+  "dt21": {
+    "name": "Bencoolen",
+    "id": "dt21",
+    "row_id": 115,
+    "interchange": false
+  },
+  "dt22": {
+    "name": "Jalan Besar",
+    "id": "dt22",
+    "row_id": 116,
+    "interchange": false
+  },
+  "bp3": {
+    "name": "Keat Hong",
+    "id": "bp3",
+    "row_id": 128,
+    "interchange": false
+  },
+  "dt23": {
+    "name": "Bendemeer",
+    "id": "dt23",
+    "row_id": 117,
+    "interchange": false
+  },
+  "dt24": {
+    "name": "Geylang Bahru",
+    "id": "dt24",
+    "row_id": 118,
+    "interchange": false
+  },
+  "dt25": {
+    "name": "Mattar",
+    "id": "dt25",
+    "row_id": 119,
+    "interchange": false
+  },
+  "dt27": {
+    "name": "Ubi",
+    "id": "dt27",
+    "row_id": 120,
+    "interchange": false
+  },
+  "dt28": {
+    "name": "Kaki Bukit",
+    "id": "dt28",
+    "row_id": 121,
+    "interchange": false
+  },
+  "dt29": {
+    "name": "Bedok North",
+    "id": "dt29",
+    "row_id": 122,
+    "interchange": false
+  },
+  "dt30": {
+    "name": "Bedok Reservoir",
+    "id": "dt30",
+    "row_id": 123,
+    "interchange": false
+  },
+  "dt31": {
+    "name": "Tampines West",
+    "id": "dt31",
+    "row_id": 124,
+    "interchange": false
+  },
+  "dt33": {
+    "name": "Tampines East",
+    "id": "dt33",
+    "row_id": 125,
+    "interchange": false
+  },
+  "dt34": {
+    "name": "Upper Changi",
+    "id": "dt34",
+    "row_id": 126,
+    "interchange": false
+  },
+  "ns24/ne6/cc1": {
+    "name": "Dhoby Ghaut",
+    "id": "ns24/ne6/cc1",
+    "row_id": 29,
+    "interchange": true
+  },
+  "ns2": {
+    "name": "Bukit Batok",
+    "id": "ns2",
+    "row_id": 8,
+    "interchange": false
+  },
+  "ns26/ew14": {
+    "name": "Raffles Place",
+    "id": "ns26/ew14",
+    "row_id": 31,
+    "interchange": true
+  },
+  "ew2/dt32": {
+    "name": "Tampines",
+    "id": "ew2/dt32",
+    "row_id": 35,
+    "interchange": true
+  },
+  "ew8/cc9": {
+    "name": "Paya Lebar",
+    "id": "ew8/cc9",
+    "row_id": 41,
+    "interchange": true
+  },
+  "ew12/dt14": {
+    "name": "Bugis",
+    "id": "ew12/dt14",
+    "row_id": 45,
+    "interchange": true
+  },
+  "ew16/ne3/te17": {
+    "name": "Outram Park",
+    "id": "ew16/ne3/te17",
+    "row_id": 47,
+    "interchange": true
+  },
+  "ew21/cc22": {
+    "name": "Buona Vista",
+    "id": "ew21/cc22",
+    "row_id": 52,
+    "interchange": true
+  },
+  "cg1/dt35": {
+    "name": "Expo",
+    "id": "cg1/dt35",
+    "row_id": 64,
+    "interchange": true
+  },
+  "ne7/dt12": {
+    "name": "Little India",
+    "id": "ne7/dt12",
+    "row_id": 69,
+    "interchange": true
+  },
+  "ne8": {
+    "name": "Farrer Park",
+    "id": "ne8",
+    "row_id": 70,
+    "interchange": false
+  },
+  "bp4": {
+    "name": "Teck Whye",
+    "id": "bp4",
+    "row_id": 129,
+    "interchange": false
+  },
+  "bp5": {
+    "name": "Phoenix",
+    "id": "bp5",
+    "row_id": 130,
+    "interchange": false
+  },
+  "bp7": {
+    "name": "Petir",
+    "id": "bp7",
+    "row_id": 131,
+    "interchange": false
+  },
+  "bp8": {
+    "name": "Pending",
+    "id": "bp8",
+    "row_id": 132,
+    "interchange": false
+  },
+  "bp9": {
+    "name": "Bangkit",
+    "id": "bp9",
+    "row_id": 133,
+    "interchange": false
+  },
+  "bp10": {
+    "name": "Fajar",
+    "id": "bp10",
+    "row_id": 134,
+    "interchange": false
+  },
+  "bp11": {
+    "name": "Segar",
+    "id": "bp11",
+    "row_id": 135,
+    "interchange": false
+  },
+  "bp12": {
+    "name": "Jelapang",
+    "id": "bp12",
+    "row_id": 136,
+    "interchange": false
+  },
+  "bp13": {
+    "name": "Senja",
+    "id": "bp13",
+    "row_id": 137,
+    "interchange": false
+  },
+  "ns21/dt11": {
+    "name": "Newton",
+    "id": "ns21/dt11",
+    "row_id": 26,
+    "interchange": true
+  },
+  "ns22/te14": {
+    "name": "Orchard",
+    "id": "ns22/te14",
+    "row_id": 27,
+    "interchange": true
+  },
+  "ns27/cc2/te20": {
+    "name": "Marina Bay",
+    "id": "ns27/cc2/te20",
+    "row_id": 32,
+    "interchange": true
+  },
+  "cc1/dt16": {
+    "name": "Bayfront",
+    "id": "cc1/dt16",
+    "row_id": 111,
+    "interchange": true
+  },
+  "dt5": {
+    "name": "Beauty World",
+    "id": "dt5",
+    "row_id": 105,
+    "interchange": false
+  },
+  "ne1/cc29": {
+    "name": "HarbourFront",
+    "id": "ne1/cc29",
+    "row_id": 66,
+    "interchange": true
+  },
+  "te13": {
+    "name": "Orchard Boulevard",
+    "id": "te13",
+    "row_id": 176,
+    "interchange": false
+  },
+  "te15": {
+    "name": "Great World",
+    "id": "te15",
+    "row_id": 178,
+    "interchange": false
+  },
+  "se5": {
+    "name": "Ranggung",
+    "id": "se5",
+    "row_id": 143,
+    "interchange": false
+  },
+  "sw1": {
+    "name": "Cheng Lim",
+    "id": "sw1",
+    "row_id": 144,
+    "interchange": false
+  },
+  "sw2": {
+    "name": "Farmway",
+    "id": "sw2",
+    "row_id": 145,
+    "interchange": false
+  },
+  "sw3": {
+    "name": "Kupang",
+    "id": "sw3",
+    "row_id": 146,
+    "interchange": false
+  },
+  "sw4": {
+    "name": "Thanggam",
+    "id": "sw4",
+    "row_id": 147,
+    "interchange": false
+  },
+  "sw5": {
+    "name": "Fernvale",
+    "id": "sw5",
+    "row_id": 148,
+    "interchange": false
+  },
+  "sw6": {
+    "name": "Layar",
+    "id": "sw6",
+    "row_id": 149,
+    "interchange": false
+  },
+  "sw7": {
+    "name": "Tongkang",
+    "id": "sw7",
+    "row_id": 150,
+    "interchange": false
+  },
+  "sw8": {
+    "name": "Renjong",
+    "id": "sw8",
+    "row_id": 151,
+    "interchange": false
+  },
+  "pe1": {
+    "name": "Cove",
+    "id": "pe1",
+    "row_id": 152,
+    "interchange": false
+  },
+  "pe2": {
+    "name": "Meridian",
+    "id": "pe2",
+    "row_id": 153,
+    "interchange": false
+  },
+  "pe3": {
+    "name": "Coral Edge",
+    "id": "pe3",
+    "row_id": 154,
+    "interchange": false
+  },
+  "pe4": {
+    "name": "Riviera",
+    "id": "pe4",
+    "row_id": 155,
+    "interchange": false
+  },
+  "pe5": {
+    "name": "Kadaloor",
+    "id": "pe5",
+    "row_id": 156,
+    "interchange": false
+  },
+  "pe6": {
+    "name": "Oasis",
+    "id": "pe6",
+    "row_id": 157,
+    "interchange": false
+  },
+  "pe7": {
+    "name": "Damai",
+    "id": "pe7",
+    "row_id": 158,
+    "interchange": false
+  },
+  "pw1": {
+    "name": "Sam Kee",
+    "id": "pw1",
+    "row_id": 159,
+    "interchange": false
+  },
+  "pw2": {
+    "name": "Teck Lee",
+    "id": "pw2",
+    "row_id": 160,
+    "interchange": false
+  },
+  "pw3": {
+    "name": "Punggol Point",
+    "id": "pw3",
+    "row_id": 161,
+    "interchange": false
+  },
+  "pw4": {
+    "name": "Samudera",
+    "id": "pw4",
+    "row_id": 162,
+    "interchange": false
+  },
+  "pw5": {
+    "name": "Nibong",
+    "id": "pw5",
+    "row_id": 163,
+    "interchange": false
+  },
+  "pw6": {
+    "name": "Sumang",
+    "id": "pw6",
+    "row_id": 164,
+    "interchange": false
+  },
+  "pw7": {
+    "name": "Soo Teck",
+    "id": "pw7",
+    "row_id": 165,
+    "interchange": false
+  },
+  "ns12": {
+    "name": "Canberra",
+    "id": "ns12",
+    "row_id": 17,
+    "interchange": false
+  },
+  "ns18": {
+    "name": "Braddell",
+    "id": "ns18",
+    "row_id": 23,
+    "interchange": false
+  },
+  "ns1/ew24": {
+    "name": "Jurong East",
+    "id": "ns1/ew24",
+    "row_id": 7,
+    "interchange": true
+  },
+  "ew9": {
+    "name": "Aljunied",
+    "id": "ew9",
+    "row_id": 42,
+    "interchange": false
+  },
+  "ew26": {
+    "name": "Lakeside",
+    "id": "ew26",
+    "row_id": 56,
+    "interchange": false
+  },
+  "ew29": {
+    "name": "Joo Koon",
+    "id": "ew29",
+    "row_id": 59,
+    "interchange": false
+  },
+  "ew32": {
+    "name": "Tuas West Road",
+    "id": "ew32",
+    "row_id": 62,
+    "interchange": false
+  },
+  "cc11": {
+    "name": "Tai Seng",
+    "id": "cc11",
+    "row_id": 88,
+    "interchange": false
+  },
+  "cc16": {
+    "name": "Marymount",
+    "id": "cc16",
+    "row_id": 91,
+    "interchange": false
+  },
+  "dt3": {
+    "name": "Hillview",
+    "id": "dt3",
+    "row_id": 104,
+    "interchange": false
+  },
+  "te1": {
+    "name": "Woodlands North",
+    "id": "te1",
+    "row_id": 166,
+    "interchange": false
+  },
+  "te3": {
+    "name": "Woodlands South",
+    "id": "te3",
+    "row_id": 167,
+    "interchange": false
+  },
+  "te4": {
+    "name": "Springleaf",
+    "id": "te4",
+    "row_id": 168,
+    "interchange": false
+  },
+  "te5": {
+    "name": "Lentor",
+    "id": "te5",
+    "row_id": 169,
+    "interchange": false
+  },
+  "te6": {
+    "name": "Mayflower",
+    "id": "te6",
+    "row_id": 170,
+    "interchange": false
+  },
+  "te7": {
+    "name": "Bright Hill",
+    "id": "te7",
+    "row_id": 171,
+    "interchange": false
+  },
+  "te8": {
+    "name": "Upper Thomson",
+    "id": "te8",
+    "row_id": 172,
+    "interchange": false
+  },
+  "te12": {
+    "name": "Napier",
+    "id": "te12",
+    "row_id": 175,
+    "interchange": false
+  },
+  "cg2": {
+    "name": "Changi Airport",
+    "id": "cg2",
+    "row_id": 65,
+    "interchange": false
+  },
+  "ne4/dt19": {
+    "name": "Chinatown",
+    "id": "ne4/dt19",
+    "row_id": 67,
+    "interchange": true
+  },
+  "ne5": {
+    "name": "Clarke Quay",
+    "id": "ne5",
+    "row_id": 68,
+    "interchange": false
+  }
+}

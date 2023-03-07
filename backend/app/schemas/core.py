@@ -31,5 +31,3 @@ class ShortestPathSchema(BaseModel):
 
     class Config:
         orm_mode = True
-
-

@@ -11,9 +11,20 @@ from typing import List
 from app.exceptions import AppError
 from sqlalchemy import exc as SQLAlchemyExceptions
 
-
 router = APIRouter()
 
+# @router.post("/stations")
+# async def add_stations(session: AsyncSession = Depends(get_session)
+# ):
+#
+#
+#     a = load_graph('recover.json')
+#     print(type(a))
+#     for i in a:
+#         d = a[i]
+#         del a[i]["row_id"]
+#         res = await Station(**dict(d)).insert(session)
+#     return "ok"
 
 @router.post("/station", response_model=TrainStationSchema)
 async def add_station(
@@ -44,15 +55,14 @@ async def get_station(
 @router.get("/all_stations", response_model=List[TrainStationWithConnectionSchema])
 async def get_all_stations(session: AsyncSession = Depends(get_session)):
     res = await Station.get_all(session)
-
     return [i for i in res]
 
 
 @router.put("/station", response_model=TrainStationWithConnectionSchema)
 async def update_station_name(
-    data: TrainStationSchema, session: AsyncSession = Depends(get_session)
+    id: str, data: TrainStationSchema, session: AsyncSession = Depends(get_session)
 ):
-    res = await Station.update(session, data)
+    res = await Station.update_by_id(session, id, data)
     return res
 
 
@@ -63,10 +73,12 @@ async def add_connecting_station(
     res = await ConnectingStation(**dict(data)).insert(session)
     return res
 
-@router.post("/update-connecting_station", response_model=ConnectingStationSchema)
-async def add_connecting_station(id: str, data: ConnectingStationSchema, session: AsyncSession = Depends(get_session)
+
+@router.put("/connecting_station", response_model=ConnectingStationSchema)
+async def update_connecting_station(
+    id: str, data: ConnectingStationSchema, session: AsyncSession = Depends(get_session)
 ):
-    res = await ConnectingStation.update(session, data)
+    res = await ConnectingStation.update_by_id(session, id, data)
     return res
 
 

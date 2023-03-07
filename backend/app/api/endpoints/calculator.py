@@ -1,10 +1,7 @@
 from fastapi import APIRouter, Depends
 from app.api.deps import get_session
 from sqlalchemy.ext.asyncio import AsyncSession
-from app.schemas.core import (
-    TrainStationWithConnectionSchema,
-    ShortestPathSchema
-)
+from app.schemas.core import TrainStationWithConnectionSchema, ShortestPathSchema
 from app.models.core import Station
 from typing import List
 import heapq
@@ -51,12 +48,9 @@ def shortest_path(graph: List[TrainStationWithConnectionSchema], start: str, end
 
 @router.get("/get_shortest_path_by_id", response_model=ShortestPathSchema)
 async def get_shortest_path_by_id(
-        start_id: str, end_id: str, session: AsyncSession = Depends(get_session)
+    start_id: str, end_id: str, session: AsyncSession = Depends(get_session)
 ):
     res = await Station.get_all(session)
     distance, stations = shortest_path(res, start_id, end_id)
-    resp = {
-        'distance': distance,
-        'stations': stations
-    }
+    resp = {"distance": distance, "stations": stations}
     return resp

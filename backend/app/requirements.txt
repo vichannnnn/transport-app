@@ -20,3 +20,6 @@ pylint-flask-sqlalchemy
 sqlalchemy[mypy]
 types-python-jose
 types-passlib
+
+# dev tooling
+faker==15.3.4
