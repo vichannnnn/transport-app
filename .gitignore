@@ -7,3 +7,4 @@ postgres/
 */.venv
 */mypy_cache
 stations/
+**/.pytest_cache
