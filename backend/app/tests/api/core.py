@@ -1,6 +1,4 @@
-import pytest
 from app import schemas
-from app import models
 from fastapi.testclient import TestClient
 from fastapi import status
 from fastapi.encoders import jsonable_encoder
@@ -14,6 +12,11 @@ def test_station_post_endpoint(test_client: TestClient, train_station: schemas.c
     payload = jsonable_encoder(train_station)
     response = test_client.post(STATION_URL, json=payload)
     assert response.status_code == status.HTTP_200_OK
+
+    resp_data = response.json()
+    assert resp_data['id'] == train_station.id
+    assert resp_data['name'] == train_station.name
+    assert resp_data['interchange'] == train_station.interchange
 
 
 def test_station_get_endpoint(test_client: TestClient):

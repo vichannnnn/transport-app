@@ -6,3 +6,4 @@ postgres/
 .idea
 */.venv
 */mypy_cache
+stations/
