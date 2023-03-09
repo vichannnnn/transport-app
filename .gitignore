@@ -1,0 +1,10 @@
+.env
+postgres/
+**/__pycache__/
+*/cookies.json
+.DS_store
+.idea
+*/.venv
+*/mypy_cache
+stations/
+**/.pytest_cache
