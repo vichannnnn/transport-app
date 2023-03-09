@@ -5,7 +5,7 @@ services:
   backend:
     container_name: backend
     build: ./backend
-    command: uvicorn app.main:app --log-level warning --host 0.0.0.0 --port 8000 --reload
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
     ports:
       - "8000:8000"
       - "9000:9000"
@@ -41,3 +41,17 @@ services:
       - ./postgres:/var/lib/postgresql/data
       - ./db:/docker-entrypoint-initdb.d/
 
+  transport-app-caddy:
+     image: caddy:2.6.2-alpine
+     container_name: transport-app-caddy
+     ports:
+       - '80:80'
+       - '443:443'
+     volumes:
+       - ./Caddyfile:/etc/caddy/Caddyfile
+       - caddy_data:/data
+       - caddy_config:/config
+
+volumes:
+  caddy_config: null
+  caddy_data: null
