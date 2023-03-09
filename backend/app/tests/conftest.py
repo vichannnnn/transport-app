@@ -60,16 +60,12 @@ def test_client():
 @pytest.fixture(name="train_station")
 def train_station():
     yield schemas.core.TrainStationSchema(
-        id="ew21/cc22",
-        name="Buona Vista",
-        interchange=True
+        id="ew21/cc22", name="Buona Vista", interchange=True
     )
+
 
 @pytest.fixture(name="train_station_2")
 def train_station_2():
     yield schemas.core.TrainStationSchema(
-        id="ew16/ne3/te17",
-        name="Outram Park",
-        interchange=True
+        id="ew16/ne3/te17", name="Outram Park", interchange=True
     )
-

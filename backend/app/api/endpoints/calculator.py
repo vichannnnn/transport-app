@@ -1,10 +1,12 @@
 from fastapi import APIRouter, Depends
-from app.api.deps import get_session
 from sqlalchemy.ext.asyncio import AsyncSession
+from app.api.deps import get_session
 from app.schemas.core import TrainStationWithConnectionSchema, ShortestPathSchema
 from app.models.core import Station
 from typing import List
 import heapq
+from fastapi.security.api_key import APIKey
+import app.api.auth as auth
 
 router = APIRouter()
 
@@ -23,7 +25,9 @@ def shortest_path(graph: List[TrainStationWithConnectionSchema], start: str, end
         if current_distance > distances[current_node_id]:
             continue
 
-        current_node = node_map[current_node_id]
+        current_node = node_map.get(current_node_id)
+        if current_node is None:
+            continue
 
         if current_node_id == end:
             while previous_nodes[current_node.id]:
@@ -34,13 +38,13 @@ def shortest_path(graph: List[TrainStationWithConnectionSchema], start: str, end
 
             return distances[end], tracked_shortest_path
 
-        for station in current_node.connecting_stations:
+        for station in current_node.connecting_stations or []:
             neighbor_id = station.connecting_id
             neighbor_distance = current_distance + station.distance
 
             if neighbor_distance < distances[neighbor_id]:
                 distances[neighbor_id] = neighbor_distance
-                previous_nodes[neighbor_id] = current_node
+                previous_nodes[neighbor_id] = current_node  # type: ignore
                 heapq.heappush(pq, (neighbor_distance, neighbor_id))
 
     return 0, []
@@ -48,7 +52,10 @@ def shortest_path(graph: List[TrainStationWithConnectionSchema], start: str, end
 
 @router.get("/get_shortest_path_by_id", response_model=ShortestPathSchema)
 async def get_shortest_path_by_id(
-    start_id: str, end_id: str, session: AsyncSession = Depends(get_session)
+    start_id: str,
+    end_id: str,
+    session: AsyncSession = Depends(get_session),
+    api_key: APIKey = Depends(auth.get_api_key),
 ):
     res = await Station.get_all(session)
     distance, stations = shortest_path(res, start_id, end_id)

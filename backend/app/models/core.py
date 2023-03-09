@@ -1,4 +1,10 @@
 from app.db.base_class import Base
+from app.exceptions import AppError
+from app.schemas.core import (
+    TrainStationSchema,
+    TrainStationWithConnectionSchema,
+    ConnectingStationSchema,
+)
 from sqlalchemy import (
     Column,
     Integer,
@@ -13,13 +19,7 @@ from sqlalchemy import (
 from sqlalchemy.orm import relationship, selectinload
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import exc as SQLAlchemyExceptions
-from app.exceptions import AppError
-from app.schemas.core import (
-    TrainStationSchema,
-    TrainStationWithConnectionSchema,
-    ConnectingStationSchema,
-)
-from typing import List
+from typing import List, Optional
 
 
 class Station(Base):
@@ -29,7 +29,7 @@ class Station(Base):
     name = Column(String, unique=True, nullable=False)
     interchange = Column(Boolean)
 
-    connecting_stations = relationship(
+    connecting_stations: "ConnectingStation" = relationship(
         "ConnectingStation",
         foreign_keys="ConnectingStation.id",
         cascade="all, delete-orphan",
@@ -50,7 +50,7 @@ class Station(Base):
 
     @classmethod
     async def get(
-        cls, session: AsyncSession, name: str = None, id: str = None
+        cls, session: AsyncSession, name: Optional[str] = None, id: Optional[str] = None
     ) -> TrainStationWithConnectionSchema:
 
         stmt = select(Station).options(selectinload(Station.connecting_stations))
@@ -81,9 +81,10 @@ class Station(Base):
             .where(Station.id == id)
             .values(name=data.name, interchange=data.interchange)
         )
-        res = await session.execute(stmt)
+        await session.execute(stmt)
         await session.commit()
-        result = TrainStationWithConnectionSchema.from_orm(res.fetchone())
+        result = await Station.get(session=session, id=id)
+        # result = TrainStationWithConnectionSchema.from_orm(res.fetchone())
         return result
 
 

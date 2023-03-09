@@ -9,5 +9,6 @@ COPY . .
 
 EXPOSE 8000
 
-RUN pip install --upgrade pip
+RUN pip install types-Pygments types-colorama types-setuptools types-ujson
+RUN pip install --no-cache-dir --upgrade pip
 RUN pip install -r ./app/requirements.txt

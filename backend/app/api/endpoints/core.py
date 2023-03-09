@@ -1,30 +1,19 @@
+import pydantic
 from fastapi import APIRouter, Depends, Query
 from app.api.deps import get_session
-from sqlalchemy.ext.asyncio import AsyncSession
 from app.schemas.core import (
     TrainStationSchema,
     ConnectingStationSchema,
     TrainStationWithConnectionSchema,
 )
 from app.models.core import Station, ConnectingStation
-from typing import List
 from app.exceptions import AppError
+from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import exc as SQLAlchemyExceptions
+from typing import List
 
 router = APIRouter()
 
-# @router.post("/stations")
-# async def add_stations(session: AsyncSession = Depends(get_session)
-# ):
-#
-#
-#     a = load_graph('recover.json')
-#     print(type(a))
-#     for i in a:
-#         d = a[i]
-#         del a[i]["row_id"]
-#         res = await Station(**dict(d)).insert(session)
-#     return "ok"
 
 @router.post("/station", response_model=TrainStationSchema)
 async def add_station(
@@ -46,8 +35,8 @@ async def get_station(
     try:
         res = await Station.get(session, name, id)
 
-    except SQLAlchemyExceptions.NoResultFound:
-        raise AppError.STATION_NOT_FOUND_ERROR
+    except SQLAlchemyExceptions.NoResultFound as e:
+        raise AppError.STATION_NOT_FOUND_ERROR from e
 
     return res
 
@@ -55,15 +44,19 @@ async def get_station(
 @router.get("/all_stations", response_model=List[TrainStationWithConnectionSchema])
 async def get_all_stations(session: AsyncSession = Depends(get_session)):
     res = await Station.get_all(session)
-    return [i for i in res]
+    return list(res)
 
 
 @router.put("/station", response_model=TrainStationWithConnectionSchema)
-async def update_station_name(
+async def update_station(
     id: str, data: TrainStationSchema, session: AsyncSession = Depends(get_session)
 ):
-    res = await Station.update_by_id(session, id, data)
-    return res
+    try:
+        res = await Station.update_by_id(session, id, data)
+        return res
+
+    except pydantic.ValidationError:
+        raise AppError.STATION_NOT_FOUND_ERROR
 
 
 @router.post("/connecting_station", response_model=ConnectingStationSchema)
@@ -75,11 +68,15 @@ async def add_connecting_station(
 
 
 @router.put("/connecting_station", response_model=ConnectingStationSchema)
-async def update_connecting_station(
+async def update_connecting_station_by_id(
     id: str, data: ConnectingStationSchema, session: AsyncSession = Depends(get_session)
 ):
-    res = await ConnectingStation.update_by_id(session, id, data)
-    return res
+    try:
+        res = await ConnectingStation.update_by_id(session, id, data)
+        return res
+
+    except pydantic.ValidationError:
+        raise AppError.STATION_NOT_FOUND_ERROR
 
 
 # @router.post("/connecting_station_script", response_model=List[ConnectingStationSchema])
