@@ -53,19 +53,48 @@ app.dependency_overrides[get_session] = override_session
 
 
 @pytest.fixture(name="test_client", scope="function")
-def test_client():
+def fixture_test_client():
     yield TestClient(app)
 
 
 @pytest.fixture(name="train_station")
-def train_station():
+def fixture_train_station():
     yield schemas.core.TrainStationSchema(
         id="ew21/cc22", name="Buona Vista", interchange=True
     )
 
 
 @pytest.fixture(name="train_station_2")
-def train_station_2():
+def fixture_train_station_2():
     yield schemas.core.TrainStationSchema(
-        id="ew16/ne3/te17", name="Outram Park", interchange=True
+        id="ew20", name="Commonwealth", interchange=False
     )
+
+
+@pytest.fixture(name="train_station_3")
+def fixture_train_station_3():
+    yield schemas.core.TrainStationSchema(
+        id="ew19", name="Queenstown", interchange=False
+    )
+
+
+@pytest.fixture(name="station_to_be_replaced")
+def fixture_station_to_be_replaced():
+    yield schemas.core.TrainStationSchema(
+        id="ew17", name="Tiong Bahru", interchange=False
+    )
+
+
+@pytest.fixture(name="connecting_station")
+def fixture_connecting_station():
+    yield schemas.core.ConnectingStationSchema(
+        id="ew21/cc22", connecting_id="ew20", distance=3, transit_time=0
+    )
+
+
+@pytest.fixture(name="connecting_station_2")
+def fixture_connecting_station_2():
+    yield schemas.core.ConnectingStationSchema(
+        id="ew20", connecting_id="ew19", distance=3, transit_time=0
+    )
+

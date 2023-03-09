@@ -9,7 +9,7 @@ class TrainStationSchema(BaseModel):
 
 
 class ConnectingStationSchema(BaseModel):
-    id: Optional[str]
+    id: str
     connecting_id: str
     distance: int
     transit_time: Optional[int]

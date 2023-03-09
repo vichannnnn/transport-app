@@ -79,11 +79,11 @@ class Station(Base):
             update(Station)
             .returning(literal_column("*"))
             .where(Station.id == id)
-            .values(name=data.name, interchange=data.interchange)
+            .values(**dict(data))
         )
         await session.execute(stmt)
         await session.commit()
-        result = await Station.get(session=session, id=id)
+        result = await Station.get(session=session, id=data.id)
         # result = TrainStationWithConnectionSchema.from_orm(res.fetchone())
         return result
 
@@ -127,11 +127,7 @@ class ConnectingStation(Base):
             .returning(literal_column("*"))
             .where(ConnectingStation.id == id)
             .where(ConnectingStation.connecting_id == data.connecting_id)
-            .values(
-                connecting_id=data.connecting_id,
-                distance=data.distance,
-                transit_time=data.transit_time,
-            )
+            .values(**dict(data))
         )
 
         res = await session.execute(stmt)
