@@ -1,12 +1,13 @@
 from fastapi import APIRouter, Depends
+from fastapi.security.api_key import APIKey
 from sqlalchemy.ext.asyncio import AsyncSession
 from app.api.deps import get_session
 from app.schemas.core import TrainStationWithConnectionSchema, ShortestPathSchema
 from app.models.core import Station
+from app.api import auth
 from typing import List
 import heapq
-from fastapi.security.api_key import APIKey
-import app.api.auth as auth
+
 
 router = APIRouter()
 

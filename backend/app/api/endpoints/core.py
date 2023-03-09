@@ -55,8 +55,8 @@ async def update_station(
         res = await Station.update_by_id(session, id, data)
         return res
 
-    except pydantic.ValidationError:
-        raise AppError.STATION_NOT_FOUND_ERROR
+    except pydantic.ValidationError as e:
+        raise AppError.STATION_NOT_FOUND_ERROR from e
 
 
 @router.post("/connecting_station", response_model=ConnectingStationSchema)
@@ -75,8 +75,8 @@ async def update_connecting_station_by_id(
         res = await ConnectingStation.update_by_id(session, id, data)
         return res
 
-    except pydantic.ValidationError:
-        raise AppError.STATION_NOT_FOUND_ERROR
+    except pydantic.ValidationError as e :
+        raise AppError.STATION_NOT_FOUND_ERROR from e
 
 
 # @router.post("/connecting_station_script", response_model=List[ConnectingStationSchema])
