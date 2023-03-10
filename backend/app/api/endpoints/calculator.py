@@ -36,6 +36,7 @@ def shortest_path(graph: List[TrainStationWithConnectionSchema], start: str, end
                 current_node = previous_nodes[current_node.id]
             tracked_shortest_path.append(node_map[start])
             tracked_shortest_path.reverse()
+            print(distances[end])
 
             return distances[end], tracked_shortest_path
 
