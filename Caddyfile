@@ -1,0 +1,7 @@
+map.himaaa.xyz {
+    reverse_proxy http://165.22.102.214:5173
+}
+
+map-backend.himaaa.xyz {
+    reverse_proxy backend:8000
+}
