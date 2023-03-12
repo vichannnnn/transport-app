@@ -97,4 +97,3 @@ def fixture_connecting_station_2():
     yield schemas.core.ConnectingStationSchema(
         id="ew20", connecting_id="ew19", distance=3, transit_time=0
     )
-

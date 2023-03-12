@@ -13,6 +13,8 @@ class ConnectingStationSchema(BaseModel):
     connecting_id: str
     distance: int
     transit_time: Optional[int]
+    waiting_time: Optional[int]
+    line: Optional[str]
 
     class Config:
         orm_mode = True

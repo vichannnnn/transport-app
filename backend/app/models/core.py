@@ -104,6 +104,8 @@ class ConnectingStation(Base):
     )
     distance = Column(Integer, nullable=False)
     transit_time = Column(Integer, nullable=True)
+    waiting_time = Column(Integer, nullable=True)
+    line = Column(String, nullable=True)
     __table_args__ = (UniqueConstraint("id", "connecting_id"),)
 
     async def insert(self, session: AsyncSession):
@@ -134,3 +136,8 @@ class ConnectingStation(Base):
         await session.commit()
         result = ConnectingStationSchema.from_orm(res.fetchone())
         return result
+
+    @classmethod
+    async def get_all(cls, session: AsyncSession) -> List[ConnectingStationSchema]:
+        res = await session.execute(select(ConnectingStation))
+        return res.scalars().all()
