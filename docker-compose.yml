@@ -6,9 +6,9 @@ services:
     container_name: backend
     build: ./backend
     command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
-    ports:
-      - "8000:8000"
-      - "9000:9000"
+    networks:
+      - internal-network
+      - default
     depends_on:
       db:
         condition: service_healthy
@@ -44,9 +44,16 @@ services:
   transport-app-caddy:
      image: caddy:2.6.2-alpine
      container_name: transport-app-caddy
+     environment:
+       FRONTEND_DOMAIN: ${FRONTEND_DOMAIN}
+       FRONTEND_REACT_URL: ${FRONTEND_REACT_URL}
+       API_DOMAIN: ${API_DOMAIN}
+       DEBUG_DOMAIN: ${DEBUG_DOMAIN}
      ports:
        - '80:80'
        - '443:443'
+       - '8000:8000'
+       - '9000:9000'
      volumes:
        - ./Caddyfile:/etc/caddy/Caddyfile
        - caddy_data:/data
@@ -55,3 +62,9 @@ services:
 volumes:
   caddy_config: null
   caddy_data: null
+
+networks:
+  internal-network:
+    name: internal-network
+    driver: bridge
+

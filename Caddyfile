@@ -1,7 +1,16 @@
-map.himaaa.xyz {
-    reverse_proxy http://165.22.102.214:5173
+{$FRONTEND_DOMAIN} {
+    reverse_proxy {$FRONTEND_REACT_URL}
 }
 
-map-backend.himaaa.xyz {
-    reverse_proxy backend:8000
+{$API_DOMAIN} {
+    handle_path /api/* {
+        reverse_proxy backend:8000
+    }
 }
+
+{$DEBUG_DOMAIN} {
+    handle_path /api/* {
+        reverse_proxy backend:9000
+    }
+}
+
